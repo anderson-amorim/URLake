@@ -6,15 +6,13 @@ module.exports = app => {
         .get(api.find)
         .delete(api.delete);
 
-    app.route('/users/:userid/urls')
-        .post(api.insert);
+    app.route('/users/:userid')
+        .post(api.insert)
+        .get(api.listByUser);
 
     app.route('/stats')
         .get(api.listAll);
 
     app.route('/stats/:id')
         .get(api.listById);
-
-    app.route('/users/:userid/stats')
-        .post(api.listByUser);
 };

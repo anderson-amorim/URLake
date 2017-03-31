@@ -11,27 +11,29 @@ module.exports = app => {
     };
 
     api.insert = (req, res) => {
-        console.log('api.insert', req, res);
+        console.log('api.insert', req.body);
+        res.json(req.body);
     };
 
     api.delete = (req, res) => {
         console.log('api.delete', req, res);
-    };
-
-    api.list = (req, res) => {
-        console.log('api.list', req, res);
+        res.sendStatus(200);
     };
 
     api.listById = (req, res) => {
         console.log('api.listById', req, res);
+        res.json(req.body);
     };
 
     api.listByUser = (req, res) => {
         console.log('api.listAll', req, res);
+        res.json(req.body);
     };
 
     api.listAll = (req, res) => {
         console.log('api.listAll', req, res);
+        res.status(200).json(req.body);
+        //if not found res.status(404).json(req.body);
     };
 
     return api;

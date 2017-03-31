@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var schema = mongoose.Schema({
 
-    id: {
+    username: {
         type: String,
         required: true
     },
