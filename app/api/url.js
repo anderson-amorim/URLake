@@ -1,4 +1,5 @@
 let mongoose = require('mongoose');
+let shortId = require('short-mongo-id');
 let logger = require('../services/logger.js');
 
 module.exports = app => {
@@ -12,6 +13,7 @@ module.exports = app => {
 
     api.insert = (req, res) => {
         console.log('api.insert', req.body);
+        //console.log(`${req.get('host')}/${shortId(user._id)}`);
         res.json(req.body);
     };
 

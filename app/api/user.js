@@ -1,4 +1,5 @@
 let mongoose = require('mongoose');
+let shortId = require('short-mongo-id');
 let logger = require('../services/logger.js');
 
 module.exports = app => {
@@ -11,7 +12,7 @@ module.exports = app => {
             username: req.body.username,
         }).then(user => {
             if (user) {
-                res.status(409).send('Username already taken!');;
+                res.status(409).send('Username already taken!');
                 return;
             }
             req.body.date = new Date();
