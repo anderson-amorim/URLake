@@ -9,7 +9,7 @@ module.exports = app => {
 
     api.insert = (req, res) => {
         model.findOne({
-            username: req.body.username,
+            username: req.body.username
         }).then(user => {
             if (user) {
                 res.status(409).send('Username already taken!');

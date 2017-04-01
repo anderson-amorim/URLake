@@ -8,7 +8,8 @@ var schema = mongoose.Schema({
     },
     date: {
         type: Date,
-        required: false
+        required: true,
+        default: Date.now
     }
 
 });

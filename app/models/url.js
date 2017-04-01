@@ -4,11 +4,13 @@ var schema = mongoose.Schema({
 
     date: {
         type: Date,
-        required: false
+        required: true,
+        default: Date.now
     },
     hits: {
         type: Number,
-        required: false
+        required: true,
+        default: 0
     },
     url: {
         type: String,
@@ -16,8 +18,13 @@ var schema = mongoose.Schema({
     },
     shortUrl: {
         type: String,
-        required: false
-    }
+        required: true
+    },
+    user: {
+		type: mongoose.Schema.ObjectId,
+		ref: 'User',
+		required: true
+	}
 });
 
 mongoose.model('Url', schema);
