@@ -9,13 +9,25 @@ module.exports = app => {
     let userModel = mongoose.model('User');
 
     api.find = (req, res) => {
-        let id = req.params.id;
+        const id = req.params.id;
         model.findOneAndUpdate(
             { _id: id },
             { $inc: { hits: 1 } },
             { new: true }
         ).then(url => {
             res.status(301).send(url.url);
+        }, error => {
+            logger.error(error);
+            res.sendStatus(404);
+        });
+    };
+
+    api.findById = (req, res) => {
+        const id = req.params.id;
+        model.findOne(
+            { _id: id }
+        ).then(url => {
+            res.json(url);
         }, error => {
             logger.error(error);
             res.sendStatus(404);
@@ -42,11 +54,12 @@ module.exports = app => {
     };
 
     api.delete = (req, res) => {
-        res.sendStatus(200);
-    };
-
-    api.listById = (req, res) => {
-        res.json(req.body);
+        model.remove({ '_id': req.params.id }).then(() => {
+            res.sendStatus(200);
+        }, error => {
+            logger.error(error);
+            res.sendStatus(500);
+        });
     };
 
     api.listByUser = (req, res) => {
@@ -58,7 +71,7 @@ module.exports = app => {
                 { $group: { _id: null, hits: { $sum: "$hits" }, urlCount: { $sum: 1 } } },
                 { $project: { _id: 0 } }
             ]).then(result => {
-                if(!result.length) {
+                if (!result.length) {
                     res.sendStatus(404);
                     return;
                 }

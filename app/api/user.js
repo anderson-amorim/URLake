@@ -28,8 +28,12 @@ module.exports = app => {
     };
 
     api.delete = (req, res) => {
-        console.log('api.delete', req, res);
-        res.sendStatus(200);
+        model.remove({ username: req.body.username }).then(() => {
+            res.sendStatus(200);
+        }, error => {
+            logger.error(error);
+            res.sendStatus(500);
+        });
     };
 
     return api;

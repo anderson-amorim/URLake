@@ -14,5 +14,5 @@ module.exports = app => {
         .get(api.listAll);
 
     app.route('/stats/:id')
-        .get(api.listById);
+        .get(api.findById);
 };
