@@ -1,34 +1,21 @@
-let mongoose = require('mongoose');
-let shortId = require('short-mongo-id');
 let logger = require('../services/logger.js');
 
 module.exports = app => {
 
     let api = {};
-    let model = mongoose.model('User');
+    let dao = app.dao.user;
 
     api.insert = (req, res) => {
-        model.findOne({
-            username: req.body.username
-        }).then(user => {
-            if (user) {
-                res.status(409).send('Username already taken!');
-                return;
-            }
-            req.body.date = new Date();
-            model.create(req.body).then((user) => {
-                res.status(201).json(user);
-            }, (error) => {
-                throw error;
-            });
+        dao.insert(req.body).then(user => {
+            res.status(201).json(user);
         }, error => {
             logger.error(error);
-            res.sendStatus(500);
+            res.status(error == 409 ? 409 : 500);
         });
     };
 
     api.delete = (req, res) => {
-        model.remove({ username: req.body.username }).then(() => {
+        dao.delete(req.params.userId).then(() => {
             res.sendStatus(200);
         }, error => {
             logger.error(error);

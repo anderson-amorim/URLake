@@ -33,6 +33,7 @@ app.use((req, res, next) => {
 
 consign({ cwd: 'app' })
     .include('models')
+    .then('dao')
     .then('api')
     .then('routes')
     .then('services')
