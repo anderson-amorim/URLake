@@ -24,8 +24,6 @@ $ npm install
 $ node server.js
 ```
 
-Thats it, nows it's time to use the services!
-
 ## Tests
 To run tests
 
