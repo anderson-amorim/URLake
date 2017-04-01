@@ -27,6 +27,12 @@ module.exports = app => {
         let userid = req.params.userid;
         let url = req.body;
         let host = req.get('host');
+
+        if(!userid || !url || !url.url) {
+            res.sendStatus(500);
+            return;
+        }
+
         dao.insert(userid, url, host).then(url => {
             res.status(201).json(url);
         }, error => {

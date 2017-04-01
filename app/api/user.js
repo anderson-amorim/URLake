@@ -6,11 +6,14 @@ module.exports = app => {
     let dao = app.dao.user;
 
     api.insert = (req, res) => {
+        if(!req.body.username) {
+            res.sendStatus(500);
+            return;
+        }
         dao.insert(req.body).then(user => {
             res.status(201).json(user);
         }, error => {
-            logger.error(error);
-            res.status(error == 409 ? 409 : 500);
+            res.sendStatus(error == 409 ? 409 : 500);
         });
     };
 

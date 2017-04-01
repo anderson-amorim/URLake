@@ -4,7 +4,7 @@
   "description": "URLake API Server",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "mocha"
   },
   "author": "Anderson de Amorim",
   "license": "MIT",
@@ -19,5 +19,9 @@
     "morgan": "^1.7.0",
     "short-mongo-id": "^0.1.1",
     "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
   }
 }
